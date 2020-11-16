@@ -1,0 +1,26 @@
+<div class="broadcast media">
+    <h4>{{broadcast.title}}</h4>
+    <p>{{broadcast.message_html|safe}}</p>
+    <div class="media-body">
+        <h5 class='media-heading'>
+            <span class='username'>
+                <a href="{% url 'broadcasts:for_user' username=broadcast.user.username %}">
+                    @{{broadcast.user.username}}</a>
+            </span>
+            <time class='time'>
+                <a href="{% url 'broadcasts:single' username=broadcast.user.username pk=broadcast.pk %}">
+                    {{broadcast.created_at}}
+                </a>
+            </time>
+        </h5>
+        <div class="media-footer">
+            {% if user.is_authenticated and broadcast.user == user %}
+            <a href="{% url 'broadcasts:delete' pk=broadcast.pk %}" title="delete" class="btn btn-simple">
+                <span class='glyphicon glyphicon-remove text-danger' aria-hidden="true"></span>
+                <span class="text-danger icon-label">Delete</span>
+            </a>
+            {% endif %}
+
+        </div>
+    </div>
+</div>

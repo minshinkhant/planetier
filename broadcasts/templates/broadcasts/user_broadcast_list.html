@@ -1,0 +1,15 @@
+{% extends "broadcasts/broadcast_base.html" %}
+
+{% block prebroadcast %}
+<div class="col-md-4">
+    <h1>@{{broadcast_user.username}}</h1>
+</div>
+{% endblock %}
+
+{% block broadcast_content %}
+<div class="col-md-8">
+    {% for broadcast in broadcast_list %}
+    {% include "broadcasts/_broadcast.html" %}
+    {% endfor %}
+</div>
+{% endblock %}

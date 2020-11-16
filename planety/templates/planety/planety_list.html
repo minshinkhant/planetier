@@ -1,0 +1,45 @@
+{% extends 'planety/planety_base.html' %}
+
+{% block preplanety %}
+<div class="col-md-4">
+    <div class="content">
+        {% if user.is_authenticated %}
+        <h2>Welcome Back! <a href="{% url 'broadcasts:for_user' username=user.username %}">
+                @{{user.username}}
+            </a></h2>
+        {% endif %}
+        <h2>Planety</h2>
+        <p>Welcome to the planety page!</p>
+    </div>
+    {% if user.is_authenticated %}
+    <a href="{% url 'planety:create' %}" class="btn btn-primary btn-sm">
+        <span class="glyphicon glyphicon-plus-sign">Create Planety</span>
+    </a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block planety_content %}
+<div class="col-md-8">
+    <div class="list-group">
+        {% for planety in object_list %}
+        <a class='list-group-item' href="{% url 'planety:single' slug=planety.slug %}">
+            <h3 class="title list-group-item-heading">{{planety.name}}</h3>
+            <div class="list-group-item-text container-fluid">
+                {{planety.description_html|safe}}
+                <div class="row">
+                    <div class="col-md-4">
+                        <span class="badge">{{planety.members.count}}</span>
+                        member{{planety.members.count|pluralize}}
+                    </div>
+                    <div class="col-md-4">
+                        <span class="badge">{{planety.broadcasts.count}}</span>
+                        broadcast{{planety.broadcasts.count|pluralize}}
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

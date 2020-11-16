@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="posts-page">
+    <div class="container">
+        <div class="row">
+            {% block prebroadcast %}{% endblock %}
+            {% block broadcast_content %}{% endblock %}
+            {% block post_broadcast %}{% endblock %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

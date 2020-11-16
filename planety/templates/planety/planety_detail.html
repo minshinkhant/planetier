@@ -1,0 +1,30 @@
+{% extends "planety/planety_base.html" %}
+
+{% block preplanety %}
+
+<h2>{{ planety.name }}</h2>
+<h4>Member Count: {{ planety.members.count }}</h4>
+
+<div class="content">
+    {% if user in planety.members.all %}
+    <a href="{% url 'planety:leave' slug=planety.slug %}" class="btn btn-primary btn-sm"><span
+            class='glyphicon glyphicon-remove-circle'></span>Leave</a>
+    {% else %}
+    <a href="{% url 'planety:join' slug=planety.slug %}" class="btn btn-primary btn-sm"><span
+            class='glyphicon glyphicon-ok-circle'></span>Join</a>
+    {% endif %}
+</div>
+{% endblock%}
+
+{% block planety_content %}
+<div class="col-md-8">
+    {% if planety.broadcasts.count == 0 %}
+    <h4>No broadcasts in this planety yet!</h4>
+    {% else %}
+    {% for broadcast in planety.broadcasts.all %}
+    {% include "broadcasts/_broadcast.html" %}
+    {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

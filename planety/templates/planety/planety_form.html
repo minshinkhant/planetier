@@ -1,0 +1,15 @@
+{% extends "planety/planety_base.html" %}
+{% load bootstrap3 %}
+
+{% block planety_content %}
+<h4>Create a new Planety!</h4>
+<div>
+    <form action="{% url 'planety:create' %}" method="POST" id='planetyForm'>
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class='btn btn-primary btn-large' value="Create">
+    </form>
+</div>
+
+
+{% endblock %}
